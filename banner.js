@@ -43,4 +43,28 @@ function createBanner() {
   created = true;
 }
 
-document.addEventListener("readystatechange", () => createBanner());
+function setVideoReferrerPolicy() {
+  for (const el of document.querySelectorAll("video, video source, audio, audio source")) {
+    el.setAttribute("referrerpolicy", "no-referrer");
+  }
+
+  for (const media of document.querySelectorAll("video, audio")) {
+    media.load?.();
+  }
+}
+
+function ensureNoReferrerMeta() {
+  if (!document.head) return;
+  if (document.querySelector('meta[name="referrer"]')) return;
+
+  const meta = document.createElement("meta");
+  meta.name = "referrer";
+  meta.content = "no-referrer";
+  document.head.prepend(meta);
+}
+
+document.addEventListener("readystatechange", () => {
+  createBanner();
+  ensureNoReferrerMeta();
+  setVideoReferrerPolicy();
+});
