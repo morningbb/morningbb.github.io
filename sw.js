@@ -41,6 +41,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
+  console.log(event.request.destination);
   // Pass through to the real network, preserving Range for video.
   const headers = new Headers(event.request.headers);
 
@@ -48,7 +49,6 @@ self.addEventListener("fetch", (event) => {
     fetch(target, {
       method: event.request.method,
       headers,
-      mode: "cors",
       credentials: "omit",
       redirect: "follow",
     })
