@@ -50,6 +50,8 @@ self.addEventListener("fetch", (event) => {
       method: event.request.method,
       headers,
       mode: "no-cors",
+      referrer: "",
+      referrerPolicy: "no-referrer",
       credentials: "omit",
       redirect: "follow",
     })
