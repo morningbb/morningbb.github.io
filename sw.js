@@ -49,6 +49,7 @@ self.addEventListener("fetch", (event) => {
     fetch(target, {
       method: event.request.method,
       headers,
+      mode: "no-cors",
       credentials: "omit",
       redirect: "follow",
     })
