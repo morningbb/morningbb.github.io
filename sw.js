@@ -4,7 +4,6 @@ const LIVE_PREFIXES = [
 
 // Try to recover a live target URL from whatever wabac-style request comes in.
 function extractLiveTarget(requestUrl) {
-  console.log("Request url:", requestUrl);
   const candidates = [requestUrl];
 
   try {
@@ -15,13 +14,11 @@ function extractLiveTarget(requestUrl) {
     for (const prefix of LIVE_PREFIXES) {
       const idx = text.indexOf(prefix);
       if (idx !== -1) {
-        console.log(idx);
         return text.slice(idx);
       }
     }
   }
 
-  console.log("not found");
   return null;
 }
 
